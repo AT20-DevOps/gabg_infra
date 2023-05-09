@@ -1,2 +1,2 @@
 # gabg_infra
-DevOpa
+DevOps
