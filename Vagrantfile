@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "server-2" do |server2|
     server2.vm.network "private_network", ip: '192.168.56.71'
     server2.vm.hostname = "server-2"
-    server2.vm.provision :file, source: "converter", destination: "converter"
-    server2.vm.provision "shell", inline: "docker compose -f /home/vagrant/converter/docker-compose.yaml up -d"
+    server2.vm.provision :file, source: "Converter", destination: "Converter"
+    server2.vm.provision "shell", inline: "docker compose -f /home/vagrant/Converter/Docker-compose.yaml up -d"
   end
 end
