@@ -1,0 +1,16 @@
+FROM gocd/gocd-agent-ubuntu-20.04:v22.2.0
+USER root
+RUN apt-get update && \
+        curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh && \
+        bash /tmp/nodesource_setup.sh && \
+        apt install nodejs && \
+        apt-get autoremove -y && \
+        apt-get clean && \ 
+        rm -rf /var/lib/apt/lists/* && \ 
+        export SONAR_SCANNER_VERSION=4.7.0.2747 && \
+        export SONAR_SCANNER_HOME=/godata/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux && \
+        curl --create-dirs -sSLo /godata/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip && \
+        unzip -o /godata/.sonar/sonar-scanner.zip -d /godata/.sonar/ && \
+        export PATH=$SONAR_SCANNER_HOME/bin:$PATH && \
+        export SONAR_SCANNER_OPTS="-server"
+USER go
